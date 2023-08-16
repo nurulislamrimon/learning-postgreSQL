@@ -105,3 +105,75 @@ create Table
 INSERT into student VALUES(1,'Nurul Islam Rimon',1);
 
 SELECT * FROM student;
+
+INSERT into student VALUES ( 4,'Nurul Islam Rimon',1 );
+
+-- update DATABASE table all row
+
+UPDATE student set name = 'Nurul';
+
+-- update DATABASE table targeted row
+
+UPDATE student set name = 'Nurul Islam Rimon' WHERE name='Nurul';
+
+-- update DATABASE table multiple targeted row
+
+UPDATE student
+set
+    name = 'N I Rimon',
+    subject_id = 1
+WHERE student_id = 1;
+
+-- delete a row by query
+
+DELETE FROM student WHERE student_id = 1 ;
+
+-- query to get all data
+
+SELECT * FROM student;
+
+-- query to get data THROUGH CONDITIONAL statement
+
+SELECT * FROM student WHERE student_id >2;
+
+-- query to get data THROUGH multiple CONDITIONAL statement
+
+SELECT * FROM student WHERE student_id >2 AND student_id<5;
+
+-- sorting
+
+SELECT * FROM student ORDER BY student_id ASC;
+
+-- limit data
+
+SELECT * FROM student LIMIT 2 ;
+
+-- limit data using page number (offset)
+
+SELECT * FROM student LIMIT 2 OFFSET 0;
+
+-- IN, NOT IN, BETWEEN, LIKE based query
+
+SELECT * FROM student WHERE student_id IN(1,7,10);
+
+-- Regular EXPRESSION====
+
+-- first letter N
+
+SELECT * FROM student WHERE name LIKE 'N%';
+
+-- last letter N
+
+SELECT * FROM student WHERE name LIKE '%N';
+
+-- N exist in anywhere
+
+SELECT * FROM student WHERE name LIKE '%N%';
+
+-- second position n (underscores means character
+
+SELECT * FROM student WHERE name LIKE '_n%';
+
+-- anything in centre and last
+
+SELECT * FROM student WHERE name LIKE 'N%u%';
