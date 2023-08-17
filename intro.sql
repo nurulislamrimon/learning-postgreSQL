@@ -258,5 +258,36 @@ FROM (
             name as student_name,
             avg(marks) as avarage_marks
         FROM student
-        GROUP BY name
-    );
+        GROUP BY
+            student_name
+    ) as avg_marks_table;
+
+-- alias
+
+SELECT
+    name as stu_name,
+    avg(marks) as stu_avg_marks
+FROM student
+GROUP BY name;
+
+-- create a view from existing tables using queries
+
+CREATE View avarage_table as
+SELECT
+    name as stu_name,
+    avg(marks) as avg_marks
+FROM student
+GROUP BY name;
+
+-- read table from view
+
+SELECT * FROM avarage_table;
+
+-- PROCEDURE as a non returned fuction
+
+CREATE PROCEDURE DEACTIVATE_UNPAID_ACCOUNTS() LANGUAGE 
+SQL AS $$ 
+	$$ UPDATE accounts SET account=false WHERE balance=0 $$;
+
+
+CALL deactivate_unpaid_accounts();
