@@ -291,3 +291,18 @@ SQL AS $$
 
 
 CALL deactivate_unpaid_accounts();
+
+-- FUNCTION as a returned fuction
+
+CREATE FUNCTION ACCOUNT_TYPE_COUNT(AC_TYPE TEXT) RETURNS 
+INTEGER LANGUAGE PLPGSQL AS $$ 
+	$$ DECLARE ac_count int;
+	BEGIN
+	SELECT count(*) INTO ac_count
+	FROM accounts
+	WHERE accounts.ac_type = $1;
+	RETURN ac_type;
+	END $$ CALL 
+
+
+CALL account_type_count(student) CALL account_type_count();
