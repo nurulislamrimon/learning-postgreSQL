@@ -306,3 +306,9 @@ INTEGER LANGUAGE PLPGSQL AS $$
 
 
 CALL account_type_count(student) CALL account_type_count();
+
+--  indexing
+
+EXPLAIN ANALYSE SELECT * FROM student WHERE name = 'Nurul I Rimon';
+
+CREATE INDEX name_index on student(name);
