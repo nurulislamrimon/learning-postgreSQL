@@ -177,3 +177,86 @@ SELECT * FROM student WHERE name LIKE '_n%';
 -- anything in centre and last
 
 SELECT * FROM student WHERE name LIKE 'N%u%';
+
+-- joinig table (populate)
+
+SELECT *
+FROM student
+    LEFT JOIN subjects ON student.subject_id = subjects.subject_id;
+
+-- AGGREGATE
+
+SELECT name, avg(student_id) FROM student;
+
+-- add new column
+
+ALTER Table student add COLUMN marks FLOAT NOT NULL DEFAULT 4.5;
+
+-- AGGREGATE by GROUP with join
+
+SELECT
+    st.subject_id,
+    st.name,
+    sum(st.subject_id)
+FROM student st
+    FULL JOIN subjects sb on st.subject_id = sb.subject_id
+GROUP BY st.subject_id;
+
+-- AGGREGATE by GROUP with join and filter
+
+SELECT
+    st.subject_id,
+    st.name,
+    sum(st.subject_id)
+FROM student st
+    FULL JOIN subjects sb on st.subject_id = sb.subject_id
+GROUP BY st.subject_id
+HAVING st.subject_id > 2;
+
+-- Subquery========
+
+SELECT *
+FROM student
+WHERE subject_id = (
+        SELECT max(marks)
+        FROM student
+    );
+
+-- sub query==========
+
+SELECT *
+FROM student
+WHERE marks in (
+        SELECT max(marks)
+        from student
+    );
+
+-- sub query second example
+
+SELECT *
+FROM student
+WHERE marks > (
+        SELECT avg(marks)
+        FROM student
+    );
+
+-- sub query on select column
+
+SELECT name, (
+        SELECT avg(marks)
+        FROM student
+    )
+FROM student;
+
+-- sub query on tables
+
+SELECT
+    student_name,
+    avarage_marks
+FROM (
+        SELECT
+            name as student_name,
+            avg(marks) as avarage_marks
+        FROM student
+        GROUP BY name
+    );
